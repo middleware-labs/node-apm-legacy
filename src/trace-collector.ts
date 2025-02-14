@@ -5,7 +5,6 @@ const {
 const {
   OTLPTraceExporter,
 } = require("@opentelemetry/exporter-trace-otlp-grpc");
-const { GrpcInstrumentation } = require("@opentelemetry/instrumentation-grpc");
 const { Resource } = require("@opentelemetry/resources");
 let {
   SEMRESATTRS_SERVICE_NAME,
@@ -36,9 +35,6 @@ export const init = (config: Config) => {
       }),
       instrumentations: [
         getNodeAutoInstrumentations({}),
-        new GrpcInstrumentation({
-          ignoreGrpcMethods: ["Export"],
-        }),
         new MongooseInstrumentation(),
       ],
     });
