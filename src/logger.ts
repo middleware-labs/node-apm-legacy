@@ -1,5 +1,5 @@
 const { logs, SeverityNumber } = require('@opentelemetry/api-logs');
-const { OTLPLogExporter } = require('@opentelemetry/exporter-logs-otlp-grpc');
+const { OTLPLogExporter } = require('@opentelemetry/exporter-logs-otlp-http');
 const { LoggerProvider, SimpleLogRecordProcessor } = require('@opentelemetry/sdk-logs');
 const {Resource} = require("@opentelemetry/resources");
 let {SEMRESATTRS_SERVICE_NAME} = require("@opentelemetry/semantic-conventions");
@@ -50,7 +50,7 @@ export const loggerInitializer = (config: Config): void => {
     });
 
     loggerProvider.addLogRecordProcessor(
-        new SimpleLogRecordProcessor(new OTLPLogExporter({url:config.target})),
+        new SimpleLogRecordProcessor(new OTLPLogExporter({url: config.target + '/v1/logs'})),
     );
 
     logs.setGlobalLoggerProvider(loggerProvider);
