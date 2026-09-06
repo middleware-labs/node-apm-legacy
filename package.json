@@ -6,7 +6,9 @@
   "types": "lib/src/index.d.ts",
   "scripts": {
     "build": "tsc --declaration",
-    "watch": "tsc -w"
+    "watch": "tsc -w",
+    "smoke": "node test/smoke.js",
+    "test": "npm run build && npm run smoke"
   },
   "exports": {
     ".": "./lib/src/index.js"
@@ -56,6 +58,7 @@
   "homepage": "https://github.com/middleware-labs/node-apm-legacy#readme",
   "devDependencies": {
     "@types/node": "^20.14.2",
+    "express": "^4.21.2",
     "typescript": "^5.9.3"
   }
 }
