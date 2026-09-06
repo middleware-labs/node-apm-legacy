@@ -1,4 +1,4 @@
-import { OTLPMetricExporter } from '@opentelemetry/exporter-metrics-otlp-grpc';
+import { OTLPMetricExporter } from '@opentelemetry/exporter-metrics-otlp-http';
 let {SEMRESATTRS_SERVICE_NAME} = require("@opentelemetry/semantic-conventions");
 import { Resource } from '@opentelemetry/resources';
 import {
@@ -10,7 +10,7 @@ import {Config} from './config';
 
 export const init = (config: Config): void => {
     const metricsExporter = new OTLPMetricExporter({ 
-        url: config.target 
+        url: config.target + '/v1/metrics' 
     });
     const metricReader =  new PeriodicExportingMetricReader({
         exporter: metricsExporter,

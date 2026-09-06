@@ -13,6 +13,7 @@ export interface Config {
   serviceName: string;
   port: {
     grpc: number;
+    http: number;
     fluent: number;
   };
   target: string;
@@ -35,9 +36,10 @@ export let configDefault: Config = {
   serviceName: "Service-" + process.pid,
   port: {
     grpc: 9319,
+    http: 9320,
     fluent: 8006,
   },
-  target: "http://localhost:9319",
+  target: "http://localhost:9320",
   accessToken: "",
   tenantID: "",
   mwAuthURL: "https://app.middleware.io/api/v1/auth",
@@ -65,7 +67,7 @@ export const init = (config: Partial<Config> = {}): Config => {
     // @ts-ignore
     configDefault.host = "http://" + process.env.MW_AGENT_SERVICE;
     configDefault.target =
-      "http://" + process.env.MW_AGENT_SERVICE + ":" + configDefault.port.grpc;
+      "http://" + process.env.MW_AGENT_SERVICE + ":" + configDefault.port.http;
   }
   diag.setLogger(
     new DiagConsoleLogger(),
