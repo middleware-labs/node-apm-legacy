@@ -2,7 +2,7 @@ name: CI
 
 on:
   push:
-    branches: [master, main, minimal-version]
+    branches: [master, main, minimal-version, node16-test]
   pull_request:
 
 jobs:
